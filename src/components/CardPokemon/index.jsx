@@ -34,7 +34,7 @@ export const CardPokemon = ({ pokemon, onDeleteClick }) => {
 
         <hr />
       </CardBody>
-      <Button> Evoluções </Button>
+
       <Button color="danger" onClick={() => onDeleteClick(pokemon)}>
         {" "}
         Apagar{" "}
