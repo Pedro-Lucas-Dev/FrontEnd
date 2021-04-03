@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://back-end-pokemon.herokuapp.com";
+const url = "https://back-end-pokemon.herokuapp.com";
 
 const getAllPokemons = () => {
   return axios(`${url}/api/pokemon`);
