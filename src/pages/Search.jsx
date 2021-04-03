@@ -29,14 +29,14 @@ const Search = () => {
 
   return (
     <div>
-      {loading ? (
+      {!loading ? (
         <CardList
           data={pokemons}
           onDeleteClick={onDeleteClick}
           onBtnEmptyListClick={onBtnEmptyListClick}
         />
       ) : (
-        <Spinner className="center" color="primary" />
+        <Spinner className="" color="primary" />
       )}
     </div>
   );
