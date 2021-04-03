@@ -1,0 +1,14 @@
+.Home {
+  padding-top: 50px;
+}
+
+h1,
+h3 {
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+  text-align: center;
+  padding-top: 20px;
+}
