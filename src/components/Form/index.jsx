@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { InputGroup, InputGroupAddon, Input } from "reactstrap";
-export const Form = ({ title, onFormChange }) => {
+import { InputGroup, InputGroupAddon, Input, CustomInput } from "reactstrap";
+export const Form = ({ title = "Cadastro do Pokemon", onFormChange }) => {
   const [form, setForm] = useState({
     id: "",
     name: "",
@@ -41,14 +41,32 @@ export const Form = ({ title, onFormChange }) => {
           onChange={(e) => onChangeInput(e.target.name, e.target.value)}
         />
       </InputGroup>
-      <InputGroup>
-        <InputGroupAddon addonType="prepend">Cor</InputGroupAddon>
-        <Input
+      <div>
+        <CustomInput
+          type="radio"
           name="color"
-          value={form.color}
-          onChange={(e) => onChangeInput(e.target.name, e.target.value)}
+          label="Verde"
+          onChange={(e) => onChangeInput(e.target.name, e.target.id)}
+          id="green"
+          inline
         />
-      </InputGroup>
+        <CustomInput
+          type="radio"
+          name="color"
+          label="Vermelho"
+          onChange={(e) => onChangeInput(e.target.name, e.target.id)}
+          id="red"
+          inline
+        />
+        <CustomInput
+          type="radio"
+          name="color"
+          label="Azul"
+          onChange={(e) => onChangeInput(e.target.name, e.target.id)}
+          id="blue"
+          inline
+        />
+      </div>
     </div>
   );
 };

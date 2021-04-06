@@ -9,7 +9,7 @@ import {
   Badge,
 } from "reactstrap";
 
-export const CardPokemon = ({ pokemon, onDeleteClick }) => {
+export const CardPokemon = ({ pokemon, onDeleteClick, mode }) => {
   return (
     <Card
       style={{
@@ -35,10 +35,12 @@ export const CardPokemon = ({ pokemon, onDeleteClick }) => {
         <hr />
       </CardBody>
 
-      <Button color="danger" onClick={() => onDeleteClick(pokemon)}>
-        {" "}
-        Apagar{" "}
-      </Button>
+      {mode !== "preview" ? (
+        <Button color="danger" onClick={() => onDeleteClick(pokemon)}>
+          {" "}
+          Apagar{" "}
+        </Button>
+      ) : null}
     </Card>
   );
 };
