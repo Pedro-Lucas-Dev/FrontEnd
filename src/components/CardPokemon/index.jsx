@@ -9,9 +9,18 @@ import {
   CardText,
   Button,
   Badge,
+  Modal,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 
-export const CardPokemon = ({ pokemon, onDeleteClick, mode }) => {
+export const CardPokemon = ({
+  pokemon,
+  onDeleteClick,
+  mode,
+  toggle,
+  modal,
+}) => {
   return (
     <Card
       style={{
@@ -52,10 +61,26 @@ export const CardPokemon = ({ pokemon, onDeleteClick, mode }) => {
       </CardBody>
 
       {mode !== "preview" ? (
-        <Button color="danger" onClick={() => onDeleteClick(pokemon)}>
-          {" "}
-          Apagar{" "}
-        </Button>
+        <>
+          <Button color="danger" onClick={toggle}>
+            {" "}
+            Apagar{" "}
+          </Button>
+          <Modal isOpen={modal} toggle={toggle}>
+            <ModalBody>
+              <b>Deseja realmente apagar o Pokémon?</b>
+              <br />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={() => onDeleteClick(pokemon)}>
+                Sim
+              </Button>{" "}
+              <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </>
       ) : null}
     </Card>
   );

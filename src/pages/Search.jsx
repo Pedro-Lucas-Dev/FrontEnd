@@ -6,6 +6,8 @@ import { Spinner } from "reactstrap";
 const Search = () => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   useEffect(() => {
     refresh();
@@ -21,6 +23,7 @@ const Search = () => {
   const onDeleteClick = (pokemon) => {
     deletPokemon(pokemon).then(() => {
       refresh();
+      toggle();
     });
   };
   const onBtnEmptyListClick = () => {
@@ -34,6 +37,8 @@ const Search = () => {
           data={pokemons}
           onDeleteClick={onDeleteClick}
           onBtnEmptyListClick={onBtnEmptyListClick}
+          toggle={toggle}
+          modal={modal}
         />
       ) : (
         <Spinner className="" color="primary" />
