@@ -33,6 +33,7 @@ const Insert = () => {
       </Alert>
       <Row style={{ paddingTop: "200px", justifyContent: "center" }}>
         <Col
+          xs="12"
           sm="12"
           md="8"
           lg="4"

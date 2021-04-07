@@ -14,7 +14,6 @@ export const CardPokemon = ({ pokemon, onDeleteClick, mode }) => {
     <Card
       style={{
         backgroundColor: pokemon.color,
-        width: "200px",
       }}
     >
       <CardImg
