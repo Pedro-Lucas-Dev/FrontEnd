@@ -7,12 +7,17 @@ import { CardPokemon } from "../components/CardPokemon";
 const Insert = () => {
   const [form, setForm] = useState({});
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
   const onDismiss = () => setError(false);
+  const onSuccess = () => setSuccess(false);
+  const [formAction, setFormAction] = useState("insert");
 
   const postPokemon = () => {
+    setFormAction("insert");
     insertPokemon(form)
       .then((response) => {
-        window.redirect("/search");
+        setSuccess(true);
+        setFormAction("reset");
       })
       .catch((err) => {
         setError(true);
@@ -20,25 +25,39 @@ const Insert = () => {
   };
   return (
     <Container>
-      {form.id ? <CardPokemon pokemon={form} mode={"preview"} /> : null}
       <Alert isOpen={error} toggle={onDismiss} color="danger">
         Não foi possivel Cadastrar
       </Alert>
-      <Row fluid="true" className={"text-center justify-content-center"}>
-        <Col lg="4" style={{ backgroundColor: "#99d9f0" }}>
-          <Form onFormChange={(form) => setForm(form)} />
-          <Button onClick={() => postPokemon()} color="success" size="lg" block>
+      <Alert isOpen={success} toggle={onSuccess} color="success">
+        Pokemon Salvado
+      </Alert>
+      <Row style={{ paddingTop: "200px", justifyContent: "center" }}>
+        <Col
+          sm="12"
+          md="8"
+          lg="4"
+          style={{
+            backgroundColor: "#99d9f0",
+            alignItems: "center",
+          }}
+        >
+          <Form
+            onFormChange={(form) => setForm(form)}
+            actionForm={formAction}
+          />
+          <Button onClick={() => postPokemon()} color="success" size="md" block>
             Cadastrar
           </Button>
           <Button
             onClick={() => window.redirect("/")}
             color="secondary"
-            size="lg"
+            size="md"
             block
           >
             Cancelar
           </Button>
         </Col>
+        {form.id ? <CardPokemon pokemon={form} mode={"preview"} /> : null}
       </Row>
     </Container>
   );

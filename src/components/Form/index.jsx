@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { InputGroup, InputGroupAddon, Input, CustomInput } from "reactstrap";
-export const Form = ({ title = "Cadastro do Pokemon", onFormChange }) => {
+export const Form = ({
+  title = "Cadastro do Pokemon",
+  onFormChange,
+  actionForm,
+}) => {
   const [form, setForm] = useState({
     id: "",
     name: "",
@@ -11,12 +15,28 @@ export const Form = ({ title = "Cadastro do Pokemon", onFormChange }) => {
     onFormChange(form);
   }, [form]);
 
+  useEffect(() => {
+    if (actionForm === "reset") {
+      onResetForm();
+    }
+  }, [actionForm]);
+  
+  const onResetForm = () => {
+    setForm({
+      id: "",
+      name: "",
+      type: "",
+      color: "",
+    });
+  };
+
   const onChangeInput = (name, value) => {
     setForm({ ...form, [name]: value });
   };
+
   return (
     <div>
-      <h1>{title}</h1>
+      <h3>{title}</h3>
       <InputGroup>
         <InputGroupAddon addonType="prepend">Número</InputGroupAddon>
         <Input
