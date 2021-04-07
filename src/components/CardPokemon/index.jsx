@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Col,
+  Row,
   Card,
   CardImg,
   CardBody,
@@ -27,7 +29,22 @@ export const CardPokemon = ({ pokemon, onDeleteClick, mode }) => {
           {" "}
           {pokemon.name} N°{pokemon.id}{" "}
           <CardText>
-            <Badge color="success">{pokemon.type}</Badge>
+            <Row>
+              {pokemon.types &&
+                Object.keys(pokemon.types).map((type) => {
+                  console.log(pokemon.types[type].check);
+                  if (pokemon.types[type].check) {
+                    return (
+                      <Col lg={4}>
+                        <Badge color={pokemon.types[type].color}>
+                          {pokemon.types[type].name}
+                        </Badge>
+                      </Col>
+                    );
+                  }
+                  return null;
+                })}
+            </Row>
           </CardText>
         </CardTitle>
 

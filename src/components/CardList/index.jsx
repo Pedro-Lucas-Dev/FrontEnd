@@ -11,7 +11,7 @@ export const CardList = ({ data, onDeleteClick, onBtnEmptyListClick }) => {
     <Row>
       {data.map((pokemon) => {
         return (
-          <Col xs={"12"} sm={"12"} md={"2"} lg={"2"} key={pokemon.id}>
+          <Col xs="12" sm="4" md="4" lg="3" key={pokemon.id}>
             <CardPokemon pokemon={pokemon} onDeleteClick={onDeleteClick} />
           </Col>
         );

@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { InputGroup, InputGroupAddon, Input, CustomInput } from "reactstrap";
+import {
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  CustomInput,
+  Label,
+  FormGroup,
+  Col,
+  Row,
+} from "reactstrap";
 export const Form = ({
   title = "Cadastro do Pokemon",
   onFormChange,
@@ -8,11 +17,29 @@ export const Form = ({
   const [form, setForm] = useState({
     id: "",
     name: "",
-    type: "",
+    types: {
+      water: {
+        name: "Water",
+        check: false,
+        color: "primary",
+      },
+      fire: {
+        name: "Fire",
+        check: false,
+        color: "danger",
+      },
+      glass: {
+        name: "Glass",
+        check: false,
+        color: "success",
+      },
+    },
     color: "",
   });
+
   useEffect(() => {
     onFormChange(form);
+    console.table(form.types);
   }, [form]);
 
   useEffect(() => {
@@ -20,12 +47,22 @@ export const Form = ({
       onResetForm();
     }
   }, [actionForm]);
-  
+
   const onResetForm = () => {
     setForm({
       id: "",
       name: "",
-      type: "",
+      types: {
+        water: {
+          check: false,
+        },
+        fire: {
+          check: false,
+        },
+        glass: {
+          check: false,
+        },
+      },
       color: "",
     });
   };
@@ -34,6 +71,11 @@ export const Form = ({
     setForm({ ...form, [name]: value });
   };
 
+  const setTypes = (name, value) => {
+    const typesInState = form.types;
+    typesInState[name].check = value;
+    setForm({ ...form, types: typesInState });
+  };
   return (
     <div>
       <h3>{title}</h3>
@@ -53,39 +95,78 @@ export const Form = ({
           onChange={(e) => onChangeInput(e.target.name, e.target.value)}
         />
       </InputGroup>
-      <InputGroup>
-        <InputGroupAddon addonType="prepend">Tipo</InputGroupAddon>
-        <Input
-          name="type"
-          value={form.type}
-          onChange={(e) => onChangeInput(e.target.name, e.target.value)}
-        />
-      </InputGroup>
+      <Label for="exampleCheckbox">Tipo: </Label>
+
+      <Row className={"offset-lg-1"}>
+        <Col lg="4">
+          <Label check>
+            <Input
+              name="fire"
+              value={form.types.fire.check}
+              onChange={(e) => setTypes(e.target.name, !form.types.fire.check)}
+              type="checkbox"
+            />
+            Fire
+          </Label>
+        </Col>
+        <Col lg="4">
+          <Label check>
+            <Input
+              name="glass"
+              value={form.types.glass.check}
+              onChange={(e) => setTypes(e.target.name, !form.types.glass.check)}
+              type="checkbox"
+            />
+            Glass
+          </Label>
+        </Col>
+        <Col lg="4">
+          <Label check>
+            <Input
+              name="water"
+              value={form.types.water.check}
+              onChange={(e) => setTypes(e.target.name, !form.types.water.check)}
+              type="checkbox"
+            />
+            Water
+          </Label>
+        </Col>
+      </Row>
+
       <div>
-        <CustomInput
-          type="radio"
-          name="color"
-          label="Verde"
-          onChange={(e) => onChangeInput(e.target.name, e.target.id)}
-          id="green"
-          inline
-        />
-        <CustomInput
-          type="radio"
-          name="color"
-          label="Vermelho"
-          onChange={(e) => onChangeInput(e.target.name, e.target.id)}
-          id="red"
-          inline
-        />
-        <CustomInput
-          type="radio"
-          name="color"
-          label="Azul"
-          onChange={(e) => onChangeInput(e.target.name, e.target.id)}
-          id="blue"
-          inline
-        />
+        <Label for="exampleCheckbox">Cor:</Label>
+        <Row>
+          <Col>
+            <CustomInput
+              type="radio"
+              name="color"
+              label="Verde"
+              onChange={(e) => onChangeInput(e.target.name, e.target.id)}
+              id="green"
+              inline
+            />
+          </Col>
+          <Col>
+            <CustomInput
+              type="radio"
+              name="color"
+              label="Vermelho"
+              onChange={(e) => onChangeInput(e.target.name, e.target.id)}
+              id="red"
+              inline
+            />
+          </Col>
+          <Col>
+            <CustomInput
+              type="radio"
+              name="color"
+              label="Azul"
+              onChange={(e) => onChangeInput(e.target.name, e.target.id)}
+              id="blue"
+              inline
+            />
+          </Col>
+        </Row>
       </div>
     </div>
   );

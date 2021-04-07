@@ -31,11 +31,11 @@ const Insert = () => {
       <Alert isOpen={success} toggle={onSuccess} color="success">
         Pokemon Salvado
       </Alert>
-      <Row style={{ paddingTop: "200px", justifyContent: "center" }}>
+      <Row lg="4" style={{ paddingTop: "200px", justifyContent: "center" }}>
         <Col
           xs="12"
-          sm="12"
-          md="8"
+          sm="4"
+          md="4"
           lg="4"
           style={{
             backgroundColor: "#99d9f0",
