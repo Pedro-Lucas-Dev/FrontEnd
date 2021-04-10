@@ -8,10 +8,13 @@ export const CardList = ({
   onDeleteClick,
   onBtnEmptyListClick,
   toggle,
-  modal,
+  term,
+  toggleAddEvolutions,
+  modalEvolution,
+  onAddEvlution,
 }) => {
   if (!data.length) {
-    return <EmptyList onBtnEmptyListClick={onBtnEmptyListClick} />;
+    return <EmptyList onBtnEmptyListClick={onBtnEmptyListClick} term={term} />;
   }
   return (
     <Row>
@@ -22,7 +25,9 @@ export const CardList = ({
               pokemon={pokemon}
               onDeleteClick={onDeleteClick}
               toggle={toggle}
-              modal={modal}
+              toggleAddEvolutions={() => toggleAddEvolutions()}
+              modalEvolution={modalEvolution}
+              onAddEvlution={onAddEvlution}
             />
           </Col>
         );

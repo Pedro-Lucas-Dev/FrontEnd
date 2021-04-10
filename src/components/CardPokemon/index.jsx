@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Col,
   Row,
@@ -13,14 +13,23 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import { Form } from "../Form";
+import { usePokemon } from "../../hooks/usePokemon";
 
 export const CardPokemon = ({
   pokemon,
   onDeleteClick,
   mode,
   toggle,
-  modal,
+  onAddEvlution,
 }) => {
+  const {
+    setContextForm,
+    contextModalConfirm,
+    modalEvolution,
+    setModalEvolution,
+  } = usePokemon();
+
   return (
     <Card
       style={{
@@ -37,17 +46,18 @@ export const CardPokemon = ({
         <CardTitle tag="h6">
           {" "}
           {pokemon.name} N°{pokemon.id}{" "}
-          <CardText>
+          <CardText tag={"div"}>
             <Row>
               {pokemon.types &&
                 Object.keys(pokemon.types).map((type) => {
-                  console.log(pokemon.types[type].check);
                   if (pokemon.types[type].check) {
                     return (
-                      <Col lg={4}>
-                        <Badge color={pokemon.types[type].color}>
-                          {pokemon.types[type].name}
-                        </Badge>
+                      <Col lg={4} key={pokemon.id}>
+                        <h3>
+                          <Badge color={pokemon.types[type].color}>
+                            {pokemon.types[type].name}
+                          </Badge>
+                        </h3>
                       </Col>
                     );
                   }
@@ -62,24 +72,67 @@ export const CardPokemon = ({
 
       {mode !== "preview" ? (
         <>
-          <Button color="danger" onClick={toggle}>
-            {" "}
-            Apagar{" "}
-          </Button>
-          <Modal isOpen={modal} toggle={toggle}>
-            <ModalBody>
-              <b>Deseja realmente apagar o Pokémon?</b>
-              <br />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={() => onDeleteClick(pokemon)}>
-                Sim
-              </Button>{" "}
-              <Button color="secondary" onClick={toggle}>
-                Cancel
-              </Button>
-            </ModalFooter>
-          </Modal>
+          <div>
+            <Button
+              color="primary"
+              block
+              onClick={() => setModalEvolution(!modalEvolution)}
+            >
+              Cadastrar Evolução
+            </Button>
+            {modalEvolution && (
+              <Modal
+                isOpen={modalEvolution}
+                toggle={() => setModalEvolution(!modalEvolution)}
+              >
+                <ModalBody>
+                  <Form
+                    title="Cadastrar Evolução"
+                    onFormChange={(form) => setContextForm(form)}
+                  />
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="primary"
+                    onClick={() => onAddEvlution(pokemon)}
+                  >
+                    Cadastrar
+                  </Button>{" "}
+                  <Button
+                    color="secondary"
+                    onClick={() => setModalEvolution(!modalEvolution)}
+                  >
+                    Calcelar
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            )}
+          </div>
+          <div>
+            <Button color="danger" block onClick={toggle}>
+              {" "}
+              Apagar{" "}
+            </Button>
+            {contextModalConfirm && (
+              <Modal isOpen={contextModalConfirm} toggle={toggle}>
+                <ModalBody>
+                  <b>Deseja realmente apagar o Pokémon?</b>
+                  <br />
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="primary"
+                    onClick={() => onDeleteClick(pokemon)}
+                  >
+                    Sim
+                  </Button>{" "}
+                  <Button color="secondary" onClick={toggle}>
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            )}
+          </div>
         </>
       ) : null}
     </Card>

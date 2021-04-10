@@ -5,6 +5,7 @@ import { Router } from "react-router-dom";
 import { RouterApp } from "./components/RouterApp";
 import { Menu } from "./components/Menu";
 import { Container } from "reactstrap";
+import ContextPokemonProvider from "./context";
 
 import { createBrowserHistory } from "history";
 const history = createBrowserHistory({
@@ -13,11 +14,13 @@ const history = createBrowserHistory({
 window.redirect = history.push;
 
 ReactDOM.render(
-  <Router history={history}>
-    <Menu />
-    <Container>
-      <RouterApp />
-    </Container>
-  </Router>,
+  <ContextPokemonProvider>
+    <Router history={history}>
+      <Menu />
+      <Container>
+        <RouterApp />
+      </Container>
+    </Router>
+  </ContextPokemonProvider>,
   document.getElementById("root")
 );

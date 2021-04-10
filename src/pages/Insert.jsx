@@ -29,7 +29,7 @@ const Insert = () => {
         Não foi possivel Cadastrar
       </Alert>
       <Alert isOpen={success} toggle={onSuccess} color="success">
-        Pokemon Salvado
+        Pokemon Cadastrado
       </Alert>
       <Row lg="4" style={{ paddingTop: "200px", justifyContent: "center" }}>
         <Col

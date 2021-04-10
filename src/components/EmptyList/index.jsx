@@ -1,15 +1,21 @@
 import React from "react";
 import { Button } from "reactstrap";
 
-export const EmptyList = ({ onBtnEmptyListClick }) => {
+export const EmptyList = ({ onBtnEmptyListClick, term }) => {
   return (
     <div>
-      <h3> Não há nenhum pokemon!</h3> <br />
-      <p> Vamos cadastrar? </p>
-      <Button color="primary" onClick={() => onBtnEmptyListClick()}>
+      {term ? (
+        <h3> {`Não há nenhum Pokémon com esse nome: ${term}`} </h3>
+      ) : (
+        <h3> Não há nenhum pokemon! </h3>
+      )}
+      <p>
         {" "}
-        Cadastrar{" "}
-      </Button>
+        Vamos cadastrar? &nbsp;
+        <Button color="primary" onClick={() => onBtnEmptyListClick()}>
+          Cadastrar{" "}
+        </Button>
+      </p>
     </div>
   );
 };

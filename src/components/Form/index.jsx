@@ -28,8 +28,8 @@ export const Form = ({
         check: false,
         color: "danger",
       },
-      glass: {
-        name: "Glass",
+      grass: {
+        name: "Grass",
         check: false,
         color: "success",
       },
@@ -38,8 +38,7 @@ export const Form = ({
   });
 
   useEffect(() => {
-    onFormChange(form);
-    console.table(form.types);
+    onFormChange && onFormChange(form);
   }, [form]);
 
   useEffect(() => {
@@ -59,7 +58,7 @@ export const Form = ({
         fire: {
           check: false,
         },
-        glass: {
+        grass: {
           check: false,
         },
       },
@@ -112,12 +111,12 @@ export const Form = ({
         <Col lg="4">
           <Label check>
             <Input
-              name="glass"
-              value={form.types.glass.check}
-              onChange={(e) => setTypes(e.target.name, !form.types.glass.check)}
+              name="grass"
+              value={form.types.grass.check}
+              onChange={(e) => setTypes(e.target.name, !form.types.grass.check)}
               type="checkbox"
             />
-            Glass
+            Grass
           </Label>
         </Col>
         <Col lg="4">
